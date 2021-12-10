@@ -36,9 +36,8 @@ Sys.setenv(LANGUAGE = "en")
 
 # Split Sentences Using Truenumber
 
-- verify my assessment of the text
+To verify my assessment of the text, the table below shows the first 3 rows and 2-3 columns of the data frame.
 
-Show the first 3 rows and 2-3 colunms of the data frame.
 ```{r}
 library(knitr)
 library(gutenbergr)
@@ -198,7 +197,7 @@ tidy_books <- bk_df %>%
 
 ### 1. an example using "nrc" lexicon
 
-I select out the most frequent words filter by sentiment "joy" from "nrc" lexicon, almost the same, but I can't figure out why the frequency of a word changed.
+I select out the most frequent words filter by sentiment "joy" from "nrc" lexicon. Comparing to the Task2, the results are almost the same, but I can't figure out why the frequency of some word changed.
 
 ```{r}
 
@@ -350,7 +349,7 @@ grid.arrange(v0,v1,v2,v3,ncol=2,nrow=2,top = "Top 10 words clustered by sentimen
 
 ### 4. Word Cloud
 
-Almost the same, only the frequency of some words change a little.
+ Comparing to the Task2, the results are almost the same, only the frequency of some words changes a little.
 
 ```{r , warning=FALSE, message=FALSE}
 library(wordcloud)
@@ -371,7 +370,7 @@ tidy_books %>%
 \newpage
 # EXTRA CREDIT: character analysis
 
-I pick Heathcliff and Catherine as my character, and plot the number of times each one appears in each chapter and the number of times both characters appear in the same paragraphs.
+I pick Heathcliff and Catherine as my characters and plot the number of times each one appears in each chapter and the number of times both characters appear in the same paragraphs.
 
 ```{r}
 getchapter <- function(df) {
@@ -450,8 +449,6 @@ grid.arrange(g2,g1,g3, ncol=1, nrow=3, top = "Appearance of Charactor in each Ch
 
 
 
-
-
 ```{r, echo = FALSE,eval = FALSE}
 # code from Allen
 # testtn <- tnum.makeObject("mssp:has-love","code","tnum.tagByQuery(\"* has text = REFEXP(\"love\")\", \"mssp.has-love\")")
@@ -478,18 +475,16 @@ grid.arrange(g2,g1,g3, ncol=1, nrow=3, top = "Appearance of Charactor in each Ch
 
 # Inference:
 
-All the Haviland and Allen's code;
-
-https://www.r-bloggers.com/2020/04/sentiment-analysis-in-r-with-sentimentr-that-handles-negation-valence-shifters/;
-
-https://towardsdatascience.com/doing-your-first-sentiment-analysis-in-r-with-sentimentr-167855445132;
-
-https://github.com/BruceMallory/Truenumbers/blob/e017672768b13c1fd98b9dc54c19c1aedbcac582/JaneAusten.pdf;
++ All the Haviland and Allen's code;
++ The sentimentr video:
+  + https://www.r-bloggers.com/2020/04/sentiment-analysis-in-r-with-sentimentr-that-handles-negation-valence-shifters/
++ The EDA in the appendix:
+  + https://github.com/BruceMallory/Truenumbers/blob/e017672768b13c1fd98b9dc54c19c1aedbcac582/JaneAusten.pdf
 
 \newpage
 # Appendix:
 
-- Split Sentences Using the Way I Learned by Myself
+### Split Sentences Using the Way I Learned Myself
 
 ```{r, echo = TRUE, fig.height= 4, fig.width=8}
 wh_s = readLines("https://raw.githubusercontent.com/MA615-Jessie-Xu/Assignment-4/main/WutheringHeights.txt")
@@ -519,19 +514,20 @@ wh_with_senti %>%
 #   highlight()
 ```
 
-- Other EDA
+### Other EDA
 
-1. This EDA shows the distribution of the occurrence of Heathcliff and Catherine in each Chapter. Difference color refer different paragraphs.
+1. This EDA shows the distribution of the occurrence of Heathcliff and Catherine in each Chapter. Difference colors refer to different paragraphs.
 
 ```{r,fig.cap="Distribution of the Appearance of Heathcliff and Catherine in each Chapter", fig.height= 4, fig.width=6}
 ggplot(dt_CH, aes(ch)) +
   geom_histogram(aes(fill = as.factor(para)), binwidth = 1)+
-  labs(title = "Distribution of the Appearance of Heathcliff and Catherine in each Chapter")+
+  labs(title = "Heathcliff and Catherine")+
   theme(plot.title = element_text(hjust = 0.5)) +
   labs(fill = "Paragraph Number") +
   xlab("Chapter Number")+theme_bw()
 ```
-2. Word Cloud:Plot the most frequent words which has real meaning in the whole passage, instead of stop and custum words or personal pronouns.
+
+2. Word Cloud: Plot the most frequent words which have real meaning in the whole passage, instead of stop and custom words or personal pronouns.
 
 ```{r}
 tidy_books %>%
@@ -541,10 +537,11 @@ tidy_books %>%
 ```
 
 
-- Further Steps using tnum
+### Further Steps using tnum
+
 ```{r, echo = TRUE, eval=FALSE}
 CHgraph<-tnum.graphTnumList(df_CH$subject)
 tnum.plotGraph(CHgraph)
 ```
 
-As you see, I try to make a tree diagram to plot the logical connection between chapters. But I can't use the function like  <tnum.makeTnumPhraseGraph> or<tnum.plotGraph> offered by the "tnum---instructions-and-examples-v1.0.pdf" and other tutorial about tnum. Even I already install the "tnum" package, the error said I can't use the function. I would like to figure it out later.
+As you see, I try to make a tree diagram to plot the logical connection between chapters (characters). But I can't use the function like  <tnum.makeTnumPhraseGraph> or <tnum.plotGraph> offered by the "tnum---instructions-and-examples-v1.0.pdf" and other tutorial about tnum. Even I already installed the "tnum" package, the error said I can't use the function. I would like to figure it out later.
